@@ -26,7 +26,13 @@ def home():
         <li><a href="/search-customer/1">Search for a Customer (Example ID: 1)</a></li>
     </ul>
     """
+@app.route('/summary')
+def summary():
+    # Load the dataset
+    df = pd.read_csv('data/Cleaned_Ecommerce_Customers.csv')
+    summary_stats = df.describe()  # Summary statistics
 
+    return render_template('summary.html', summary_stats=summary_stats.to_html())
 @app.route("/statistics")
 def statistics():
     """
